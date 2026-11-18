@@ -1,0 +1,94 @@
+<Window x:Class="PS2EXE.Studio.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PS2EXE Studio" Width="1040" Height="790" MinWidth="760" MinHeight="670"
+        WindowStartupLocation="CenterScreen" Background="{StaticResource WindowBrush}" Foreground="{StaticResource TextBrush}" FontFamily="Segoe UI" FontSize="14">
+  <Grid Margin="28" Background="{StaticResource WindowBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <DockPanel Margin="0,0,0,22" LastChildFill="False">
+      <StackPanel>
+        <TextBlock Text="PS2EXE Studio" FontSize="27" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" />
+        <TextBlock Text="PowerShell to Executable · .NET 10" Foreground="{StaticResource SecondaryTextBrush}" Margin="0,4,0,0"/>
+      </StackPanel>
+      <TextBlock x:Name="ModuleText" Text="Verificando módulo..." Foreground="{StaticResource SecondaryTextBrush}"
+                 DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+    </DockPanel>
+    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Background="{StaticResource WindowBrush}">
+      <StackPanel>
+        <Border Background="{StaticResource PanelBrush}" CornerRadius="14" Padding="24" BorderBrush="{StaticResource OutlineBrush}" BorderThickness="1" Margin="0,0,0,14">
+          <StackPanel>
+            <TextBlock Text="COMPILAÇÃO" Foreground="{StaticResource TextBrush}" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,14"/>
+            <TextBlock Text="Script de origem (.ps1)" Style="{StaticResource FieldLabel}"/>
+            <DockPanel Margin="0,0,0,14">
+              <Button Content="Procurar..." DockPanel.Dock="Right" Margin="10,0,0,0" Click="SelectInput_Click"/>
+              <TextBox x:Name="InputPath" />
+            </DockPanel>
+            <TextBlock Text="Executável de destino (.exe)" Style="{StaticResource FieldLabel}"/>
+            <DockPanel Margin="0,0,0,14">
+              <Button Content="Salvar como..." DockPanel.Dock="Right" Margin="10,0,0,0" Click="SelectOutput_Click"/>
+              <TextBox x:Name="OutputPath"/>
+            </DockPanel>
+            <TextBlock Text="Ícone personalizado (.ico)" Style="{StaticResource FieldLabel}"/>
+            <DockPanel Margin="0,0,0,18">
+              <Button Content="Selecionar..." DockPanel.Dock="Right" Margin="10,0,0,0" Click="SelectIcon_Click"/>
+              <TextBox x:Name="IconPath" />
+            </DockPanel>
+            <WrapPanel>
+              <CheckBox x:Name="NoConsole" Content="Aplicação gráfica (sem console)" IsChecked="True" Margin="0,0,24,8"/>
+              <CheckBox x:Name="RequireAdmin" Content="Solicitar administrador" Margin="0,0,24,8"/>
+              <CheckBox x:Name="DpiAware" Content="DPI Aware" Margin="0,0,24,8"/>
+              <CheckBox x:Name="WinFormsDpiAware" Content="WinForms DPI Aware" Margin="0,0,24,8"/>
+            </WrapPanel>
+            <WrapPanel Margin="0,10,0,0">
+              <StackPanel Width="190" Margin="0,0,20,0">
+                <TextBlock Text="Arquitetura" Style="{StaticResource FieldLabel}"/>
+                <ComboBox x:Name="Architecture" SelectedIndex="2">
+                  <ComboBoxItem Content="Automática"/>
+                  <ComboBoxItem Content="x86"/>
+                  <ComboBoxItem Content="x64"/>
+                </ComboBox>
+              </StackPanel>
+              <StackPanel Width="190">
+                <TextBlock Text="Apartment" Style="{StaticResource FieldLabel}"/>
+                <ComboBox x:Name="Apartment" SelectedIndex="1">
+                  <ComboBoxItem Content="Padrão"/>
+                  <ComboBoxItem Content="STA"/>
+                  <ComboBoxItem Content="MTA"/>
+                </ComboBox>
+              </StackPanel>
+            </WrapPanel>
+          </StackPanel>
+        </Border>
+        <Border Background="{StaticResource PanelBrush}" CornerRadius="14" Padding="24" BorderBrush="{StaticResource OutlineBrush}" BorderThickness="1" Margin="0,0,0,14">
+          <StackPanel>
+            <TextBlock Text="IDENTIDADE DO EXECUTÁVEL" Foreground="{StaticResource TextBrush}" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,14"/>
+            <UniformGrid Columns="2">
+              <StackPanel Margin="0,0,10,10"><TextBlock Text="Título" Style="{StaticResource FieldLabel}"/><TextBox x:Name="AppTitle" Margin="0,0,0,0"/></StackPanel>
+              <StackPanel Margin="0,0,0,10"><TextBlock Text="Produto" Style="{StaticResource FieldLabel}"/><TextBox x:Name="Product" Margin="0,0,0,0"/></StackPanel>
+              <StackPanel Margin="0,0,10,10"><TextBlock Text="Empresa" Style="{StaticResource FieldLabel}"/><TextBox x:Name="Company" Margin="0,0,0,0"/></StackPanel>
+              <StackPanel Margin="0,0,0,10"><TextBlock Text="Versão" Style="{StaticResource FieldLabel}"/><TextBox x:Name="Version" Text="1.0.0.0" Margin="0,0,0,0"/></StackPanel>
+            </UniformGrid>
+            <TextBlock Text="Descrição" Style="{StaticResource FieldLabel}"/><TextBox x:Name="Description" Margin="0,0,0,0"/>
+          </StackPanel>
+        </Border>
+        <Border Background="{StaticResource PanelBrush}" CornerRadius="14" Padding="24" BorderBrush="{StaticResource OutlineBrush}" BorderThickness="1">
+          <StackPanel>
+            <TextBlock Text="LOG DE COMPILAÇÃO" Foreground="{StaticResource TextBrush}" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,12"/>
+            <TextBox x:Name="LogText" Height="145" IsReadOnly="True" TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </ScrollViewer>
+    <DockPanel Grid.Row="2" Margin="0,16,0,0" LastChildFill="False">
+      <TextBlock x:Name="StatusText" Text="Pronto" Foreground="{StaticResource SecondaryTextBrush}"
+                 DockPanel.Dock="Left" VerticalAlignment="Center"/>
+      <Button x:Name="CompileButton" Content="Compilar EXE" Width="166" Height="44" Style="{StaticResource PrimaryButton}"
+              DockPanel.Dock="Right" Click="Compile_Click"/>
+    </DockPanel>
+  </Grid>
+</Window>

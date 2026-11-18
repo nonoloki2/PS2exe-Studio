@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>PS2EXE.Studio</AssemblyName>
+    <RootNamespace>PS2EXE.Studio.App</RootNamespace>
+    <ApplicationIcon></ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../PS2EXE.Studio.Core/PS2EXE.Studio.Core.csproj" />
+    <ProjectReference Include="../PS2EXE.Studio.Infrastructure/PS2EXE.Studio.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

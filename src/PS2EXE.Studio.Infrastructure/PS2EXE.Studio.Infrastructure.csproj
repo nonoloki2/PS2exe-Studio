@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup><ProjectReference Include="../PS2EXE.Studio.Core/PS2EXE.Studio.Core.csproj" /></ItemGroup>
+</Project>
